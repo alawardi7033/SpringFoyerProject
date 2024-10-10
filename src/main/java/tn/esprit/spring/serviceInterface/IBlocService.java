@@ -17,4 +17,6 @@ public interface IBlocService {
     Bloc retrieveFoyer (long  idBloc);
 
     void removeFoyer (long idBloc);
+
+    List<Bloc>getBlockByNomUniv(String uni);
 }

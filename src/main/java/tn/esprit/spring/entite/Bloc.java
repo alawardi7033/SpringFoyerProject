@@ -1,5 +1,6 @@
 package tn.esprit.spring.entite;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -25,8 +26,10 @@ public class Bloc {
 
     // Many Blocs belong to one Foyer
     @ManyToOne
+            @JsonIgnore
      Foyer foyer;
 
     // One Bloc has many Chambres
-
+    @OneToMany (mappedBy = "bloc")
+     List<Chambre>chambreList;
 }

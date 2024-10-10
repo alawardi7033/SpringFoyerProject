@@ -1,12 +1,13 @@
 package tn.esprit.spring.serviceImpl;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.spring.entite.Bloc;
 import tn.esprit.spring.repository.blocRepository;
 import tn.esprit.spring.serviceInterface.IBlocService;
 
 import java.util.List;
-
+@AllArgsConstructor
 @Service
 public class BlocServiceImpl implements IBlocService {
     private blocRepository bRepository;
@@ -34,4 +35,11 @@ public class BlocServiceImpl implements IBlocService {
     public void removeFoyer(long idBloc) {
         bRepository.deleteById(idBloc);
     }
+
+    @Override
+    public List<Bloc> getBlockByNomUniv(String uni) {
+        return bRepository.findByFoyerUniversiteNomUniversiteLike(uni);
+    }
+
+
 }

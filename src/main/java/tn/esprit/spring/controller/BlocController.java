@@ -11,6 +11,11 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping("/Bloc")
 public class BlocController {
+    @GetMapping ("/listbloc/{uni}")
+    public List<Bloc> getBlockByNomUniv(@PathVariable String uni) {
+        return IBlocService.getBlockByNomUniv(uni);
+    }
+
     IBlocService IBlocService;
     @GetMapping("/retrieveAllBloc")
     public List<Bloc> retrieveAllBloc() {
@@ -36,6 +41,8 @@ public class BlocController {
     public void removeFoyer(@PathVariable long idBloc) {
         IBlocService.removeFoyer(idBloc);
     }
+
+
 
 
 }
