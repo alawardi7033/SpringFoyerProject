@@ -1,6 +1,7 @@
 package tn.esprit.spring.serviceImpl;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import tn.esprit.spring.entite.Bloc;
 import tn.esprit.spring.entite.Chambre;
@@ -11,6 +12,7 @@ import tn.esprit.spring.serviceInterface.IBlocService;
 import java.util.List;
 @AllArgsConstructor
 @Service
+@Slf4j
 public class BlocServiceImpl implements IBlocService {
     blocRepository bRepository;
     chambreRepository CRepository;
@@ -56,10 +58,11 @@ public class BlocServiceImpl implements IBlocService {
         for (Chambre chambre : chambres) {
             chambre.setBloc(bloc);
             CRepository.save(chambre);
+            log.info(chambre.toString());
         }
-        assert bloc != null;
-        bloc.setChambreList(chambres);
-        bRepository.save(bloc);
+        //assert bloc != null;
+        //bloc.setChambreList(chambres);
+        //bRepository.save(bloc);
         return bloc;
     }
 
