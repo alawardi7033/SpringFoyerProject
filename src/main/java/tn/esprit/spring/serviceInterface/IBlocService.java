@@ -1,6 +1,6 @@
 package tn.esprit.spring.serviceInterface;
 
-import org.springframework.stereotype.Service;
+
 import tn.esprit.spring.entite.Bloc;
 
 
@@ -19,4 +19,7 @@ public interface IBlocService {
     void removeFoyer (long idBloc);
 
     List<Bloc>getBlockByNomUniv(String uni);
+
+    Bloc affecterChambresABloc(List<Long> numChambre, long idBloc);
+
 }

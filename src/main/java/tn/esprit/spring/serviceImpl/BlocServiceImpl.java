@@ -3,14 +3,17 @@ package tn.esprit.spring.serviceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.spring.entite.Bloc;
+import tn.esprit.spring.entite.Chambre;
 import tn.esprit.spring.repository.blocRepository;
+import tn.esprit.spring.repository.chambreRepository;
 import tn.esprit.spring.serviceInterface.IBlocService;
 
 import java.util.List;
 @AllArgsConstructor
 @Service
 public class BlocServiceImpl implements IBlocService {
-    private blocRepository bRepository;
+    blocRepository bRepository;
+    chambreRepository CRepository;
     @Override
     public List<Bloc> retrieveAllBloc() {
         return bRepository.findAll();
@@ -39,6 +42,25 @@ public class BlocServiceImpl implements IBlocService {
     @Override
     public List<Bloc> getBlockByNomUniv(String uni) {
         return bRepository.findByFoyerUniversiteNomUniversiteLike(uni);
+    }
+
+    @Override
+    public Bloc affecterChambresABloc(List<Long> numChambre, long idBloc) {
+
+        Bloc bloc = bRepository.findById(idBloc).orElse(null);
+        List<Chambre> chambres = CRepository.findByNumeroChambreIn(numChambre);
+        if (chambres.isEmpty()) {
+            throw new RuntimeException("Aucune chambre trouvée avec les numéros fournis : " + numChambre);
+        }
+
+        for (Chambre chambre : chambres) {
+            chambre.setBloc(bloc);
+            CRepository.save(chambre);
+        }
+        assert bloc != null;
+        bloc.setChambreList(chambres);
+        bRepository.save(bloc);
+        return bloc;
     }
 
 

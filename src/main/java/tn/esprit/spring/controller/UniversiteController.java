@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping("/Universite")
 public class UniversiteController {
-
+    IUniversiteService IUniversiteService;
     @GetMapping("/retrieveAllUniversite")
     public List<Universite> retrieveAllUniversite() {
         return IUniversiteService.retrieveAllUniversite();
@@ -37,6 +37,14 @@ public class UniversiteController {
         IUniversiteService.removeUniversite(idUniversite);
     }
 
-    IUniversiteService IUniversiteService;
+    @PostMapping("/afectfoytouni/{idFoyer}/{nomUniversite}")
+    public Universite affectFoyerToUniversiter(@PathVariable long idFoyer, @PathVariable String nomUniversite) {
+        return IUniversiteService.affecterFoyerAUniversite(idFoyer, nomUniversite);
+    }
+
+    @PutMapping("/desaffecterFoyer/{idUniversite}")
+    public Universite desaffecterFoyerAUniversite(@PathVariable long idUniversite) {
+        return IUniversiteService.desaffecterFoyerAUniversite(idUniversite);
+    }
 
 }
