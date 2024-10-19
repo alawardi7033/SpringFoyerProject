@@ -6,4 +6,5 @@ import tn.esprit.spring.entite.Etudiant;
 
 @Repository
 public interface etudiantRepository extends JpaRepository<Etudiant , Long> {
+    Etudiant findByCin(long cin);
 }

@@ -1,5 +1,6 @@
 package tn.esprit.spring.entite;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -22,12 +23,12 @@ public class Foyer {
      long idFoyer;
      String nomFoyer;
      long capaciteFoyer;
-
+@JsonIgnore
     // Many Foyers belong to one Universite
     @OneToOne(mappedBy = "foyer")
      Universite universite;
 
     // One Foyer has many Blocs
-    @OneToMany(mappedBy = "foyer")
+    @OneToMany(mappedBy = "foyer", cascade = CascadeType.ALL, orphanRemoval = true)
      List<Bloc> blocs;
 }

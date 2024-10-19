@@ -2,6 +2,7 @@ package tn.esprit.spring.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.spring.entite.Chambre;
 import tn.esprit.spring.entite.Universite;
 import tn.esprit.spring.serviceInterface.IUniversiteService;
 
@@ -46,5 +47,10 @@ public class UniversiteController {
     public Universite desaffecterFoyerAUniversite(@PathVariable long idUniversite) {
         return IUniversiteService.desaffecterFoyerAUniversite(idUniversite);
     }
+    @GetMapping("/chambres/{nomUniversite}")
+    public List<Chambre> getChambresParNomUniversite(@PathVariable String nomUniversite) {
+        return IUniversiteService.getChambresParNomUniversite(nomUniversite);
+    }
 
 }
+

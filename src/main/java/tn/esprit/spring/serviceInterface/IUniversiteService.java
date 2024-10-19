@@ -1,5 +1,6 @@
 package tn.esprit.spring.serviceInterface;
 
+import tn.esprit.spring.entite.Chambre;
 import tn.esprit.spring.entite.Universite;
 
 import java.util.List;
@@ -18,4 +19,5 @@ public interface IUniversiteService {
      Universite  affecterFoyerAUniversite (long idFoyer, String nomUniversite) ;
 
      Universite desaffecterFoyerAUniversite(long idUniversite);
+    List<Chambre> getChambresParNomUniversite(String nomUniversite);
 }

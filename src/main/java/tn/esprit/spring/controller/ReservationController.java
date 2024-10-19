@@ -37,6 +37,8 @@ public class ReservationController {
         IReservationService.removeReservation(idReservation);
     }
 
-
-
+    @PostMapping("/ajouter")
+    public Reservation ajouterReservation(@RequestParam long idChambre, @RequestParam long cinEtudiant) {
+        return IReservationService.ajouterReservation(idChambre, cinEtudiant);
+    }
 }

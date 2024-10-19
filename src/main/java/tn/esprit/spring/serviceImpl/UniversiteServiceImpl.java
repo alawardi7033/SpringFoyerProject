@@ -2,18 +2,22 @@ package tn.esprit.spring.serviceImpl;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import tn.esprit.spring.entite.Bloc;
+import tn.esprit.spring.entite.Chambre;
 import tn.esprit.spring.entite.Foyer;
 import tn.esprit.spring.entite.Universite;
 import tn.esprit.spring.repository.UniversiteRepository;
 import tn.esprit.spring.repository.foyerRepository;
 import tn.esprit.spring.serviceInterface.IUniversiteService;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
 @AllArgsConstructor
 public class UniversiteServiceImpl implements IUniversiteService {
-UniversiteRepository universiteRepository;
+    UniversiteRepository universiteRepository;
     foyerRepository FoyerRepository;
     @Override
     public List<Universite> retrieveAllUniversite() {
@@ -66,5 +70,21 @@ UniversiteRepository universiteRepository;
             universiteRepository.save(u);
         }
         return u;
+    }
+
+    @Override
+    public List<Chambre> getChambresParNomUniversite(String nomUniversite) {
+
+        Universite universite = universiteRepository.findByNomUniversiteLike(nomUniversite);
+        if (universite != null && universite.getFoyer() != null) {
+            List<Bloc> blocs = universite.getFoyer().getBlocs();
+            List<Chambre> chambres = new ArrayList<>();
+            for (Bloc bloc : blocs) {
+                chambres.addAll(bloc.getChambreList());
+            }
+            return chambres;
+        } else {
+            return Collections.emptyList();
+        }
     }
 }

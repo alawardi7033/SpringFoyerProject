@@ -3,6 +3,7 @@ package tn.esprit.spring.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.spring.entite.Chambre;
+import tn.esprit.spring.entite.TypeChambre;
 import tn.esprit.spring.serviceInterface.IChambreService;
 
 import java.util.List;
@@ -38,5 +39,10 @@ public class ChambreController {
         IChambreService.removeFoyer(idChambre);
     }
 
+
+    @GetMapping("/bloc/{idBloc}/type/{typeC}")
+    public List<Chambre> getChambresParBlocEtType(@PathVariable long idBloc, @PathVariable TypeChambre typeC) {
+         return IChambreService.getChambresParBlocEtType(idBloc, typeC);
+    }
 
 }

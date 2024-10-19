@@ -31,5 +31,6 @@ public class Bloc {
 
     // One Bloc has many Chambres
     @OneToMany (mappedBy = "bloc")
+    @JsonIgnore
      List<Chambre>chambreList;
 }

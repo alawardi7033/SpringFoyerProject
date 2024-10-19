@@ -3,6 +3,7 @@ package tn.esprit.spring.serviceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.spring.entite.Chambre;
+import tn.esprit.spring.entite.TypeChambre;
 import tn.esprit.spring.repository.chambreRepository;
 import tn.esprit.spring.serviceInterface.IChambreService;
 
@@ -35,5 +36,11 @@ public class ChambreServiceImpl implements IChambreService {
     @Override
     public void removeFoyer(long idChambre) {
         cRepository.deleteById(idChambre);
+    }
+
+    @Override
+    public List<Chambre> getChambresParBlocEtType(long idBloc, TypeChambre typeC) {
+            return cRepository.findByBlocIdBlocAndTypeC(idBloc, typeC);
+
     }
 }

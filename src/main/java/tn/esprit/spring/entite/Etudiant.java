@@ -1,5 +1,6 @@
 package tn.esprit.spring.entite;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -29,6 +30,8 @@ public class Etudiant {
 
     // One Etudiant can have many Reservations
     @ManyToMany(mappedBy = "etudiants")
-     List<Reservation> reservations;
+    @JsonIgnore
+    @ToString.Exclude
+    List<Reservation> reservations;
 
 }
